@@ -9,7 +9,7 @@ import { deleteProduct, getProductById, getStatus, updateProduct } from '../stat
 import { constant } from '../utils/constant';
 
 function Edit() {
-    const categoryOption = constant.categoryOption;
+    const categoryOption = constant.categoryOption.filter((item) => item?.id !== -1);
     const params = useParams();
     const response = useSelector(getStatus);
     const detail = useSelector((state) => getProductById(state, params?.id));

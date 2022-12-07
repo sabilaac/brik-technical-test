@@ -1,6 +1,10 @@
 export const constant = {
     categoryOption: [
         {
+            id: -1,
+            label: "All Categories",
+        },
+        {
             id: 1,
             label: "Snack",
         },

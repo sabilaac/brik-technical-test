@@ -7,7 +7,7 @@ import { addProduct, getStatus } from "../state/productSlice";
 import { constant } from '../utils/constant';
 
 function Create() {
-    const categoryOption = constant.categoryOption;
+    const categoryOption = constant.categoryOption.filter((item) => item?.id !== -1);
     const response = useSelector(getStatus);
     const dispatch = useDispatch();
     const [alertShow, setalertShow] = useState(false);

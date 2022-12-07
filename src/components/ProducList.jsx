@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, ButtonGroup, Card, Col, Container, FloatingLabel, Form, Image, Row } from "react-bootstrap";
+import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import EmptyState from "./EmptyState";
 import { useSelector } from "react-redux";
@@ -46,6 +46,7 @@ const ProductList = () => {
         let newPage = page;
 
         switch (action) {
+            default: 
             case "prev":
                 newPage--;
                 console.log("prev")
@@ -56,8 +57,10 @@ const ProductList = () => {
                 break;
         }
 
-        if ((keyword || category.id !== -1) && list && list.length > 0) {
-            const filtered = list.filter((item) => item?.name.includes(keyword ?? "") && item?.CategoryId.includes(category.id));
+        console.log(list)
+
+        if ((keyword || category.id) && list && list.length > 0) {
+            const filtered = list.filter((item) => item?.name.toLowerCase().includes(keyword ? keyword.toLowerCase() :"") && item?.CategoryId.toString().includes(category?.id !== -1 ? category.id.toString() : ""));
 
             setCountFoundItem(filtered.length);
 
@@ -121,10 +124,10 @@ const ProductList = () => {
                                                     />
                                                 </div>
                                                 <Card.Body>
-                                                    <Link to={`/product/${item?._id}`} className="d-block text-decoration-none link-primary text-truncate" style={{ boxSizing: "border-box" }}>
+                                                    <Link to={`/product/${item?._id}`} className="text-decoration-none link-primary text-truncate" style={{ boxSizing: "border-box" }}>
                                                         {item?.name}
                                                     </Link>
-                                                    <small className="d-block text-muted text-truncate">
+                                                    <small className="text-muted text-truncate">
                                                         {item?.categoryName}
                                                     </small>
                                                     <b>
